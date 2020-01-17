@@ -46,9 +46,10 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
         MessageEmbed embed = new EmbedBuilder()
                 .setColor(PermLevel.MOD.getColor())
-                .setDescription("(" + message.getJumpUrl() + ")[\uD83D\uDCE8 New Suggestion Posted]")
+                .setDescription("[\uD83D\uDCE8 New Suggestion Posted](" + message.getJumpUrl() + ")")
                 .setAuthor(member.getEffectiveName() + " (" +author.getAsTag() + ")", null, author.getEffectiveAvatarUrl())
                 .addField(" ", trimmed, false)
+                .setFooter("SuggestionManager by Daedalus")
                 .build();
 
         SQLProvider provider = SuggestionManager.getDatabaseProvider();
