@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -15,11 +16,12 @@ public class SuggestionController {
     }
 
     public void createSuggestion(Message message, TextChannel channel, User author) throws SQLException {
-        PreparedStatement query = this.provider.grabConnection().prepareStatement("INSERT INTO suggestions (message_id, channel_id, author_id, reactions) VALUES (?, ?, ?, '[]');");
+        Connection conn = this.provider.grabConnection();
+        PreparedStatement query = conn.prepareStatement("INSERT INTO suggestions (message_id, channel_id, author_id, reactions) VALUES (?, ?, ?, '[]');");
 
-        query.setLong(0, message.getIdLong());
-        query.setLong(1, channel.getIdLong());
-        query.setLong(2, author.getIdLong());
+        query.setLong(1, message.getIdLong());
+        query.setLong(2, channel.getIdLong());
+        query.setLong(3, author.getIdLong());
 
         query.execute();
     }
