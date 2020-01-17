@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
+}
+
+mainClassName = 'com.example.jda.Bot'
+
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'net.dv8tion:JDA:4.0.0_79'
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.0'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
+    compile 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
+    compile 'org.codehaus.janino:janino:3.0.8'
+    testCompile 'ch.qos.logback:logback-classic:1.2.3'
+    testCompile 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
+    testCompile 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+    testCompile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
+    testCompile 'org.codehaus.janino:janino:3.0.8'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.redstonedaedalus.suggestionmanager.SuggestionManager'
+        )
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'

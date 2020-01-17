@@ -1,0 +1,8 @@
+src/main/resources/*
+out
+build
+gradle
+.gradle
+.idea
+gradlew
+gradle.bat
